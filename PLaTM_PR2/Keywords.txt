@@ -1,0 +1,7 @@
+char
+else
+float
+if
+int
+main
+return
