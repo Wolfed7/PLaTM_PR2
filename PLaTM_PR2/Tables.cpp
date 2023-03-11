@@ -1,5 +1,17 @@
 #include "Tables.h"
 
+Tables::Tables()
+{
+   Keywords   = new StaticTable("Keywords.txt"  );
+   Operators  = new StaticTable("Operators.txt" );
+   Separators = new StaticTable("Separators.txt");
+   Brackets   = new StaticTable("Brackets.txt"  );
+   Specials   = new StaticTable("Specials.txt"  );
+
+   Constants = new DynamicTable();
+   Variables = new DynamicTable();
+}
+
 Tables::Tables
 (
    string keywords,

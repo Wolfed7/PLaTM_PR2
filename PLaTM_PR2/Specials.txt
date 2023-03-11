@@ -1,3 +1,4 @@
-%
-&
-_
+if
+else
+main
+return

@@ -30,6 +30,7 @@ class Tables
 
 public:
 
+   Tables();
    Tables(string, string, string, string, string);
 
    // Возвращает пару: номер таблицы и
