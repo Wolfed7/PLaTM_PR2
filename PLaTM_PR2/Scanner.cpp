@@ -12,6 +12,7 @@ Scanner::Scanner(Tables tables)
 
 void Scanner::StartScan(string code) 
 {
+   tokenLineIndexes.push_back(0);
    ChangeStateTo(new ScannerStateStart());
 
    for (char lexeme : code) 
@@ -321,7 +322,7 @@ void ScannerStateOperation::update(Scanner &scanner, char lexeme)
    }
    else if (lexeme == ';' || lexeme == ',')
    {
-      scanner.CreateToken(TokenConstant);
+      scanner.CreateToken(TokenOperator);
       scanner.PushToBuffer(lexeme);
       scanner.CreateToken(TokenSeparator);
       scanner.ChangeStateTo(new ScannerStateStart());
@@ -337,7 +338,7 @@ void ScannerStateOperation::update(Scanner &scanner, char lexeme)
 
 void ScannerStateCommentOrOperation::update(Scanner &scanner, char lexeme) 
 {
-   if (lexeme == '-' || lexeme == '+' || lexeme == '*' || lexeme == '=' || lexeme == '!' || lexeme == '<' || lexeme == '>')
+   if (lexeme == '=')
    {
       scanner.PushToBuffer(lexeme);
       scanner.ChangeStateTo(new ScannerStateOperation());
@@ -408,5 +409,9 @@ void ScannerStateFinishMultilineComment::update(Scanner &scanner, char lexeme)
    {
       scanner.multilineComment = false;
       scanner.ChangeStateTo(new ScannerStateStart());
+   }
+   else
+   {
+      scanner.ChangeStateTo(new ScannerStateMultilineComment());
    }
 }

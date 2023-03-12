@@ -77,8 +77,16 @@ int main()
    auto tokens = scanner.GetTokens();
    auto tokenLineIndexes = scanner.GetTokenLineIndexes();
 
+   // Временный вывод токенов.
+   for (size_t i = 0; i < tokenLineIndexes.size() - 1; i++)
+   {
+      for (size_t j = tokenLineIndexes[i]; j < tokenLineIndexes[i + 1]; j++)
+         cout << tokens[j].ToStr() << " ";
+      cout << "\n";
+   }
+
    for (auto &err : s_errors) 
-      cout << err.line << "\t" << err.msg << '\n';
+      cout << err.line << "\t" << err.msg << "\n";
 
    if (s_errors.size() > 0)
       return 1;
